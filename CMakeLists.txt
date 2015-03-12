@@ -21,3 +21,4 @@ main.cpp
 add_executable(a.out ${SOURCE_LIST})
 target_link_libraries(a.out gtest)
 target_link_libraries(a.out pthread)
+target_link_libraries(a.out stdc++)

@@ -1,5 +1,5 @@
-CPP=g++
-CC=gcc
+CPP=${CXX}
+CC=${CC}
 CFLAGS=-Wall -g  -DDEBUG
 LINKS	=  -lgtest -lpthread -lstdc++
 
@@ -15,9 +15,9 @@ TEST=a.out
 VPATH		 = ./
 
 INC=-I.\
-	-I./bits \
+	-I./bits
 
-LIB=-L.\
+LIB=-L.
 
 
 all:clean $(TEST)
