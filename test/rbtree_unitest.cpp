@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "map"
+#include "mymap"
 
 TEST(rb_tree, 0) {
     my::RBTree<int> a;

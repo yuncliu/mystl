@@ -248,16 +248,18 @@ public:
 };
 
 template<typename T>
-inline bool 
-operator==(const RBTree_iterator<T>& x, 
-const RBTree_const_iterator<T>& y) 
-{ return x._node == y._node; }
+inline bool
+operator==(const RBTree_iterator<T>& x,
+const RBTree_const_iterator<T>& y) {
+    return x._node == y._node;
+}
 
 template<typename T>
-inline bool 
-operator!=(const RBTree_iterator<T>& x, 
-const RBTree_const_iterator<T>& y) 
-{ return x._node != y._node; }
+inline bool
+operator!=(const RBTree_iterator<T>& x,
+const RBTree_const_iterator<T>& y) {
+    return x._node != y._node;
+}
 
 
 template<typename T, typename Compare = my::less<T> ,
@@ -344,7 +346,7 @@ class RBTree {
         }
         return const_iterator(minimum(_root));
     }
-    
+
     const_iterator end() const {
         return const_iterator(NULL);
     }
@@ -609,7 +611,7 @@ class RBTree {
         x->color = RB_BLACK;
     }
 
-    inline NodeType* minimum(NodeType* p) const{
+    inline NodeType* minimum(NodeType* p) const {
         return NodeType::minimum(p);
     }
 

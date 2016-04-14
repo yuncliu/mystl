@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
-#include "map"
-#include <map>
+#include "mymap"
 #include <algorithm>
 
 TEST(map, insert) {
