@@ -1,1 +1,4 @@
 # mystl
+
+make gtest
+make
