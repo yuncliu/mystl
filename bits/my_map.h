@@ -5,6 +5,7 @@
 #include <string.h>
 #include "my_rbtree.h"
 #include "my_allo.h"
+#include "my_utility.h"
 
 //for gtest
 #ifdef TEST
@@ -53,7 +54,7 @@ public:
     map(const self_type& m): _tree(m._tree) {
     }
 
-    map(self_type&& m): _tree(std::move(m._tree)) {
+    map(self_type&& m): _tree(my::move(m._tree)) {
     }
 
     ~map() {
@@ -118,34 +119,19 @@ public:
         return 0 == _tree.size();
     }
 
-    self_type& operator=(self_type& m) {
-        this->clear();
+    self_type& operator=(const self_type& m) {
         _tree = m._tree;
         return *this;
     }
 
     self_type& operator=(self_type&& m) {
-        this->clear();
-        _tree = std::move(m._tree);
-        return *this;
-    }
-
-    self_type& operator=(const self_type& m) {
-        this->clear();
-        _tree = m._tree;
-        return *this;
-    }
-
-    self_type& operator=(const self_type&& m) {
-        this->clear();
-        _tree = std::move(m._tree);
+        _tree = my::move(m._tree);
         return *this;
     }
 
     value_type& operator[](key_type key) {
         iterator it = this->find(key);
-        if ( it == _tree.end())
-        {
+        if (it == _tree.end()) {
             value_type v;
             memset(&v, 0x00, sizeof(value_type));
             my::pair<iterator, bool> itt = this->insert(pair_type(key, v));

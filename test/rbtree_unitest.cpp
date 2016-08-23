@@ -160,14 +160,14 @@ TEST(rb_tree, prefix_and_suffix) {
     EXPECT_TRUE( it == it6);
 }
 
-TEST(rb_tree, std_move) {
+TEST(rb_tree, my_move) {
     my::RBTree<int> a;
     for (int i = 0; i<100; ++i)
     {
         a.insert(i);
     }
     my::RBTree<int> b;
-    b = std::move(a);
+    b = my::move(a);
     my::RBTree<int>::const_iterator it = b.find(10);
     EXPECT_TRUE( *it == 10);
     EXPECT_TRUE( a._root == NULL);

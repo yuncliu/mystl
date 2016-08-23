@@ -376,16 +376,7 @@ class RBTree {
 
     self_type& operator=(const self_type& tree) {
         this->clear();
-        iterator it = tree.begin();
-        for(;it != tree.end();it++) {
-            this->insert(*it);
-        }
-        return *this;
-    }
-
-    self_type& operator=(self_type& tree) {
-        this->clear();
-        iterator it = tree.begin();
+        const_iterator it = tree.begin();
         for(;it != tree.end();it++) {
             this->insert(*it);
         }
