@@ -18,6 +18,11 @@ public:
     pair(const pair<T1, T2>& _p)
     :first(_p.first), second(_p.second) {}
 
+#if __cplusplus >= 201103L
+    pair(pair<T1, T2>&& _p)
+    :first(_p.first), second(_p.second) {}
+#endif
+
     void swap(pair<T1, T2>& a) {
         my::swap(this->first, a.first);
         my::swap(this->second, a.second);

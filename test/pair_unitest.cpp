@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "my_pair.h"
+#include <mymap>
 using namespace my;
 
 TEST(pair, 0) {
