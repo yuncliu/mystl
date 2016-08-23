@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "mymap"
+#include "myutility"
 
 TEST(rb_tree, 0) {
     my::RBTree<int> a;
@@ -157,4 +158,17 @@ TEST(rb_tree, prefix_and_suffix) {
 
     my::RBTree<int>::iterator it6 = --it4;
     EXPECT_TRUE( it == it6);
+}
+
+TEST(rb_tree, std_move) {
+    my::RBTree<int> a;
+    for (int i = 0; i<100; ++i)
+    {
+        a.insert(i);
+    }
+    my::RBTree<int> b;
+    b = std::move(a);
+    my::RBTree<int>::const_iterator it = b.find(10);
+    EXPECT_TRUE( *it == 10);
+    EXPECT_TRUE( a._root == NULL);
 }

@@ -1,6 +1,6 @@
 CPP=${CXX}
 CC=${CC}
-CFLAGS=-Wall -g  -DDEBUG
+CFLAGS=-std=c++11 -Wall -g  -DDEBUG
 LINKS	=  -lgtest -lpthread -lstdc++
 
 

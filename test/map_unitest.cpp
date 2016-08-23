@@ -184,3 +184,15 @@ TEST(map, map_of_map) {
     my::map<int, int>::iterator itt = it->second.find(1);
     EXPECT_TRUE( 123 == itt->second);
 }
+
+my::map<int, int> get_map_as_rvalue() {
+    my::map<int, int> v;
+    v.insert(my::pair<int, int>(1, 123));
+    return v;
+}
+
+TEST(map, std_move) {
+    my::map<int, int> a = get_map_as_rvalue();
+    my::map<int, int>::iterator it = a.find(1);
+    EXPECT_TRUE( 123 == it->second);
+}

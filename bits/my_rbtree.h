@@ -5,6 +5,12 @@
 #include "my_allo.h"
 
 //#include <ext/new_allocator.h>    // for new__allocator
+//for gtest
+#ifdef TEST
+#define PRIVATE public
+#else
+#define PRIVATE private
+#endif
 
 namespace my {
 
@@ -210,7 +216,7 @@ public:
     }
 
     self_type operator++(int) {
-        self_type tmp = *this;
+        self_type tmp(*this);
         node = rbtree_increment(node);
         return tmp;
     }
@@ -221,7 +227,7 @@ public:
     }
 
     self_type operator--(int) {
-        self_type tmp = *this;
+        self_type tmp(*this);
         node = rbtree_decrement(node);
         return tmp;
     }
@@ -360,6 +366,13 @@ class RBTree {
         return *this;
     }
 
+    self_type& operator=(const self_type&& tree) {
+        printf("move const = called\n");
+        this->clear();
+        this->_root = tree._root;
+        tree.root = NULL;
+    }
+
     self_type& operator=(self_type& tree) {
         this->clear();
         iterator it = tree.begin();
@@ -369,7 +382,15 @@ class RBTree {
         return *this;
     }
 
- private:
+    self_type& operator=(self_type&& tree) {
+        printf("move = called\n");
+        this->clear();
+        this->_root = tree._root;
+        tree._root = NULL;
+        return *this;
+    }
+
+ PRIVATE:
 
     void left_rotate(NodeType* x) {
         NodeType* y = x->right;
@@ -633,7 +654,7 @@ class RBTree {
             NULL : last_less;
     }
 
- private:
+ PRIVATE:
     NodeType*       _root;
     Compare         _less;
     allocator_type  _alloc;

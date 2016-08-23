@@ -6,6 +6,13 @@
 #include "my_rbtree.h"
 #include "my_allo.h"
 
+//for gtest
+#ifdef TEST
+#define PRIVATE public
+#else
+#define PRIVATE private
+#endif
+
 namespace my{
 
 template<typename Key, typename Val, typename Compare = my::less<Key> >
@@ -15,7 +22,7 @@ public:
     bool operator() (const pair_type& t1, const pair_type& t2) const {
         return _less(t1.first, t2.first);
     }
-    private:
+    PRIVATE:
     Compare _less;
 };
 
@@ -114,9 +121,21 @@ public:
         return *this;
     }
 
+    self_type& operator=(self_type&& m) {
+        this->clear();
+        _tree = std::move(m._tree);
+        return *this;
+    }
+
     self_type& operator=(const self_type& m) {
         this->clear();
         _tree = m._tree;
+        return *this;
+    }
+
+    self_type& operator=(const self_type&& m) {
+        this->clear();
+        _tree = std::move(m._tree);
         return *this;
     }
 
@@ -132,7 +151,7 @@ public:
         return it->second;
     }
 
-private:
+PRIVATE:
     tree_type _tree;
 };
 
