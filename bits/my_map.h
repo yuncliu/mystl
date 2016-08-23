@@ -53,6 +53,9 @@ public:
     map(const self_type& m): _tree(m._tree) {
     }
 
+    map(self_type&& m): _tree(std::move(m._tree)) {
+    }
+
     ~map() {
     }
 

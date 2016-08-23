@@ -36,6 +36,10 @@ class TreeNode {
         :data(t.data), left(t.left), right(t.right), parent(t.parent){
     }
 
+    explicit TreeNode(NodeType&& t)
+        :data(t.data), left(t.left), right(t.right), parent(t.parent){
+    }
+
     ~TreeNode() {
     }
 
@@ -124,6 +128,9 @@ public:
     RBTree_iterator(const self_type& p): node(p.node){
     }
 
+    RBTree_iterator(self_type&& p): node(p.node){
+    }
+
     RBTree_iterator(const_iterator& p): node(p.node){
     }
 
@@ -199,6 +206,12 @@ public:
     typedef TreeNode<T>*                link_type;
 
     RBTree_const_iterator(): node(NULL){
+    }
+
+    RBTree_const_iterator(const self_type& t): node(t.node){
+    }
+
+    RBTree_const_iterator(self_type&& t): node(t.node){
     }
 
     RBTree_const_iterator(link_type p): node(p){
@@ -292,6 +305,10 @@ class RBTree {
             insert(*it);
         }
     }
+    RBTree(self_type&& tree): _root(tree._root), _size(tree._size) {
+        tree._root = NULL;
+        tree._size= 0;
+    }
 
     ~RBTree() {
         delete_tree(_root);
@@ -366,13 +383,6 @@ class RBTree {
         return *this;
     }
 
-    self_type& operator=(const self_type&& tree) {
-        printf("move const = called\n");
-        this->clear();
-        this->_root = tree._root;
-        tree.root = NULL;
-    }
-
     self_type& operator=(self_type& tree) {
         this->clear();
         iterator it = tree.begin();
@@ -383,7 +393,6 @@ class RBTree {
     }
 
     self_type& operator=(self_type&& tree) {
-        printf("move = called\n");
         this->clear();
         this->_root = tree._root;
         tree._root = NULL;

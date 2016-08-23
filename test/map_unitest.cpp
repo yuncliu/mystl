@@ -196,3 +196,14 @@ TEST(map, std_move) {
     my::map<int, int>::iterator it = a.find(1);
     EXPECT_TRUE( 123 == it->second);
 }
+
+TEST(map, std_move_1) {
+    my::map<int, int> a;
+    a.insert(my::pair<int, int>(1, 10));
+    a.insert(my::pair<int, int>(2, 20));
+    my::map<int, int> b = std::move(a);
+    my::map<int, int>::iterator it = b.find(1);
+    EXPECT_TRUE( 10 == it->second);
+    EXPECT_TRUE( 0 == a.size());
+    EXPECT_TRUE( NULL == a._tree._root);
+}
