@@ -54,8 +54,10 @@ public:
     map(const self_type& m): _tree(m._tree) {
     }
 
+#if __cplusplus >= 201103L
     map(self_type&& m): _tree(my::move(m._tree)) {
     }
+#endif
 
     ~map() {
     }
@@ -124,10 +126,12 @@ public:
         return *this;
     }
 
+#if __cplusplus >= 201103L
     self_type& operator=(self_type&& m) {
         _tree = my::move(m._tree);
         return *this;
     }
+#endif
 
     value_type& operator[](key_type key) {
         iterator it = this->find(key);

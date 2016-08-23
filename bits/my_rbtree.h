@@ -1,6 +1,6 @@
 #ifndef _MY_RBTREE_H_
 #define _MY_RBTREE_H_
-#include "my_functional.h"
+#include "my_utility.h"
 #include "my_pair.h"
 #include "my_allo.h"
 
@@ -36,9 +36,11 @@ class TreeNode {
         :data(t.data), left(t.left), right(t.right), parent(t.parent){
     }
 
+#if __cplusplus >= 201103L
     explicit TreeNode(NodeType&& t)
         :data(t.data), left(t.left), right(t.right), parent(t.parent){
     }
+#endif
 
     ~TreeNode() {
     }
@@ -128,8 +130,10 @@ public:
     RBTree_iterator(const self_type& p): node(p.node){
     }
 
+#if __cplusplus >= 201103L
     RBTree_iterator(self_type&& p): node(p.node){
     }
+#endif
 
     RBTree_iterator(const_iterator& p): node(p.node){
     }
@@ -211,8 +215,10 @@ public:
     RBTree_const_iterator(const self_type& t): node(t.node){
     }
 
+#if __cplusplus >= 201103L
     RBTree_const_iterator(self_type&& t): node(t.node){
     }
+#endif
 
     RBTree_const_iterator(link_type p): node(p){
     }
@@ -305,10 +311,12 @@ class RBTree {
             insert(*it);
         }
     }
+#if __cplusplus >= 201103L
     RBTree(self_type&& tree): _root(tree._root), _size(tree._size) {
         tree._root = NULL;
         tree._size= 0;
     }
+#endif
 
     ~RBTree() {
         delete_tree(_root);
@@ -382,13 +390,14 @@ class RBTree {
         }
         return *this;
     }
-
+#if __cplusplus >= 201103L
     self_type& operator=(self_type&& tree) {
         this->clear();
         this->_root = tree._root;
         tree._root = NULL;
         return *this;
     }
+#endif
 
  PRIVATE:
 

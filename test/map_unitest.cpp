@@ -191,7 +191,10 @@ my::map<int, int> get_map_as_rvalue() {
     return v;
 }
 
-TEST(map, std_move) {
+
+#if __cplusplus >= 201103L
+
+TEST(map, rvalue) {
     my::map<int, int> a = get_map_as_rvalue();
     my::map<int, int>::iterator it = a.find(1);
     EXPECT_TRUE( 123 == it->second);
@@ -207,6 +210,7 @@ TEST(map, std_move_1) {
     EXPECT_TRUE( 0 == a.size());
     EXPECT_TRUE( NULL == a._tree._root);
 }
+
 
 TEST(map, my_move) {
     my::map<int, int> a = get_map_as_rvalue();
@@ -224,3 +228,5 @@ TEST(map, my_move_1) {
     EXPECT_TRUE( 0 == a.size());
     EXPECT_TRUE( NULL == a._tree._root);
 }
+
+#endif

@@ -160,6 +160,8 @@ TEST(rb_tree, prefix_and_suffix) {
     EXPECT_TRUE( it == it6);
 }
 
+#if __cplusplus >= 201103L
+
 TEST(rb_tree, my_move) {
     my::RBTree<int> a;
     for (int i = 0; i<100; ++i)
@@ -172,3 +174,5 @@ TEST(rb_tree, my_move) {
     EXPECT_TRUE( *it == 10);
     EXPECT_TRUE( a._root == NULL);
 }
+
+#endif

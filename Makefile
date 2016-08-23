@@ -5,9 +5,9 @@ LINKS	=  -lgtest -lpthread -lstdc++
 
 
 TESTOBJS	= test/pair_unitest.o \
-			  test/functional_unitest.o \
 			  test/rbtree_unitest.o \
 			  test/map_unitest.o \
+			  test/utility_unitest.o \
 		      main.o
 
 TEST=a.out
