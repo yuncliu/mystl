@@ -19,6 +19,10 @@ namespace my {
 #define IS_LEFT(x) x == x->parent->left
 #define IS_RIGHT(x) x == x->parent->right
 
+/**
+ * @class TreeNode
+ * @brief data type for tree node
+ */
 template<typename T>
 class TreeNode {
  public:
@@ -286,7 +290,9 @@ const RBTree_const_iterator<T>& y) {
     return x._node != y._node;
 }
 
-
+/**
+ * @brief Red-Black tree
+ */
 template<typename T, typename Compare = my::less<T> ,
     typename Allocator = my::my_allocator<T> >
 class RBTree {
@@ -312,9 +318,12 @@ class RBTree {
         }
     }
 #if __cplusplus >= 201103L
+    /**
+     * @brief move constructor;
+     */
     RBTree(self_type&& tree): _root(tree._root), _size(tree._size) {
         tree._root = NULL;
-        tree._size= 0;
+        tree._size = 0;
     }
 #endif
 
@@ -323,6 +332,11 @@ class RBTree {
         _root = NULL;
     }
 
+    /**
+     * @brief  insert element
+     * @retval <pos, result>, result is ture when success, pos is where
+     *         the new node is located
+     */
     pair<iterator, bool> insert(const T& _t) {
         NodeType* p = _node_alloc.allocate(1);
         NodeType* tmp = NULL;
@@ -391,6 +405,9 @@ class RBTree {
         return *this;
     }
 #if __cplusplus >= 201103L
+    /**
+     * @brief operator = for right value reference
+     */
     self_type& operator=(self_type&& tree) {
         my::swap(this->_root, tree._root);
         my::swap(this->_size, tree._size);

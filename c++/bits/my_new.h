@@ -1,7 +1,6 @@
 #ifndef _MY_NEW_H_
 #define _MY_NEW_H_
-#include "my_utility.h"
-#include <stdlib.h>
+#include <stddef.h> // size_t
 
 //for gtest
 #ifdef TEST

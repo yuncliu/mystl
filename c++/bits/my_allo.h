@@ -21,10 +21,16 @@ class my_allocator
         ~my_allocator() {
         }
 
+        /**
+         * only allocate memory, do not call constructor
+         */
         _Tp*  allocate(size_type n, const void* hint = 0) {
             return static_cast<_Tp*>(::operator new(n * sizeof(_Tp)));
         }
 
+        /**
+         * free memeory, do not call destructor
+         */
         void  deallocate (_Tp* __p, size_type n) {
             ::operator delete(__p);
         }
@@ -34,10 +40,16 @@ class my_allocator
             typedef my_allocator<_Tp1> other;
         };
 
+        /**
+         * call constructor
+         */
         void construct(pointer __p, const _Tp& __val) {
             ::new((void *)__p) _Tp(__val);
         }
 
+        /**
+         * call destructor
+         */
         template<typename _Up>
         void destroy(_Up* __p) {
             __p->~_Up();
