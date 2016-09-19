@@ -1,8 +1,5 @@
 #ifndef _MY_MAP_H_
 #define _MY_MAP_H_
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "my_rbtree.h"
 #include "my_allo.h"
 #include "my_utility.h"

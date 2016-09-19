@@ -1,6 +1,6 @@
 #ifndef _MY_ALLOC_H_
 #define _MY_ALLOC_H_
-#include <stdio.h>
+#include "my_new.h"
 namespace my{
 
 template<typename _Tp>

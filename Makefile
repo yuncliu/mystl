@@ -4,7 +4,8 @@ CFLAGS=-std=c++11 -Wall -g  -DDEBUG
 LINKS	=  -lgtest -lpthread -lstdc++
 
 
-TESTOBJS	= test/pair_unitest.o \
+TESTOBJS	= c++/src/new.o \
+			  test/pair_unitest.o \
 			  test/rbtree_unitest.o \
 			  test/map_unitest.o \
 			  test/utility_unitest.o \
@@ -15,7 +16,7 @@ TEST=a.out
 VPATH		 = ./
 
 INC=-I. \
-	-I./bits \
+	-I./c++ \
 	-I./googletest/googletest/include
 
 LIB=-L. \
