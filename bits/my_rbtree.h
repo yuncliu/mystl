@@ -392,9 +392,8 @@ class RBTree {
     }
 #if __cplusplus >= 201103L
     self_type& operator=(self_type&& tree) {
-        this->clear();
-        this->_root = tree._root;
-        tree._root = NULL;
+        my::swap(this->_root, tree._root);
+        my::swap(this->_size, tree._size);
         return *this;
     }
 #endif
