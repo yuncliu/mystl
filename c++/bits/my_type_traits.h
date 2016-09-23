@@ -1,0 +1,3 @@
+#ifndef MY_TYPE_TRAITS_H
+#define MY_TYPE_TRAITS_H
+#endif // MY_TYPE_TRAITS_H

@@ -8,6 +8,7 @@ TESTOBJS	= c++/src/new.o \
 			  test/pair_unitest.o \
 			  test/rbtree_unitest.o \
 			  test/map_unitest.o \
+			  test/vector_unittest.o \
 			  test/utility_unitest.o \
 		      main.o
 

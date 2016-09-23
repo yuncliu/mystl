@@ -31,7 +31,7 @@ class my_allocator
         /**
          * free memeory, do not call destructor
          */
-        void  deallocate (_Tp* __p, size_type n) {
+        void  deallocate (_Tp* __p, size_type n = 0) {
             ::operator delete(__p);
         }
 

@@ -1,1 +1,6 @@
+#ifndef MY_MAP
+#define MY_MAP 1
+
 #include "bits/my_map.h"
+
+#endif // MY_MAP
