@@ -1,6 +1,7 @@
 #ifndef MY_VECTOR
 #define MY_VECTOR 1
 
+#include "bits/my_iterator.h"
 #include "bits/my_vector.h"
 
 #endif // MY_VECTOR
