@@ -1,7 +1,7 @@
 #ifndef _MY_MAP_H_
 #define _MY_MAP_H_
 #include "my_rbtree.h"
-#include "my_allo.h"
+#include "my_alloc.h"
 #include "my_utility.h"
 
 //for gtest

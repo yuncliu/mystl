@@ -1,7 +1,7 @@
 #ifndef MY_VECTOR_H
 #define MY_VECTOR_H 1
 
-#include "my_allo.h"
+#include "my_alloc.h"
 #include "my_utility.h"
 #include "my_construct.h"
 #include <string.h>
@@ -11,7 +11,8 @@ namespace my {
 template<class _TP, class _Alloc>
 class vector_base {
 public:
-    typedef _Alloc  allocator_type;
+    //typedef _Alloc  allocator_type;
+    typedef typename alloc_traits<_TP, _Alloc>::allocator_type allocator_type;
 
     vector_base(const allocator_type& alloc)
     :_head(NULL), _tail(NULL), _end_of_storage(NULL) {}
@@ -31,15 +32,16 @@ public:
         return allocator_type();
     }
 protected:
-    _TP* _head;
-    _TP* _tail;
-    _TP* _end_of_storage;
-    typedef simple_alloc<_TP, _Alloc> _data_alloctor;
+    _TP*            _head;
+    _TP*            _tail;
+    _TP*            _end_of_storage;
+    allocator_type  _allocator;
+
     _TP* _allocate(size_t __n) {
-        return _data_alloctor::allocate(__n);
+        return _allocator.allocate(__n);
     }
     void _deallocate(_TP* __p, size_t __n) {
-        return _data_alloctor::deallocate(__p, __n);
+        return _allocator.deallocate(__p, __n);
     }
 };
 
@@ -71,6 +73,7 @@ protected:
     using _base::_head;
     using _base::_tail;
     using _base::_end_of_storage;
+    using _base::_allocator;
 
     void _insert_aux(iterator pos, const _TP& __x);
 
@@ -89,7 +92,7 @@ public:
     }
 
     ~vector() {
-        destroy(_head, _tail);
+        my::destroy(_head, _tail);
     }
 
     iterator begin() {
@@ -103,7 +106,7 @@ public:
     void push_back(const _TP& __x) {
         if (_tail != _end_of_storage) {
             //new ((void*)_tail) T(__x);
-            construct(_tail, __x);
+            _allocator.construct(_tail, __x);
             _tail++;
         }
         else {

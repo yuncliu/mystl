@@ -24,14 +24,14 @@ class my_allocator
         /**
          * only allocate memory, do not call constructor
          */
-        static _Tp*  allocate(size_type n, const void* hint = 0) {
+        _Tp*  allocate(size_type n, const void* hint = 0) {
             return static_cast<_Tp*>(::operator new(n * sizeof(_Tp)));
         }
 
         /**
          * free memeory, do not call destructor
          */
-        static void  deallocate (_Tp* __p, size_type n = 0) {
+        void  deallocate (_Tp* __p, size_type n = 0) {
             ::operator delete(__p);
         }
 
@@ -63,17 +63,14 @@ class my_allocator
     private:
 };
 
-template<class _Tp, class _Alloc>
-class simple_alloc {
-public:
-    static _Tp* allocate(size_t __n)
-      { return 0 == __n ? 0 : (_Tp*) _Alloc::allocate(__n * sizeof (_Tp)); }
-    static _Tp* allocate(void)
-      { return (_Tp*) _Alloc::allocate(sizeof (_Tp)); }
-    static void deallocate(_Tp* __p, size_t __n)
-      { if (0 != __n) _Alloc::deallocate(__p, __n * sizeof (_Tp)); }
-    static void deallocate(_Tp* __p)
-      { _Alloc::deallocate(__p, sizeof (_Tp)); }
+template<class _Tp, class _Allocator>
+struct alloc_traits {
+    typedef typename _Allocator::template rebind<_Tp>::other allocator_type;
+};
+
+template<class _Tp, class _Tp1>
+struct alloc_traits<_Tp, my_allocator<_Tp1> > {
+    typedef my_allocator<_Tp1> allocator_type;
 };
 
 }

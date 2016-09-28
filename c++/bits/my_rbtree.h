@@ -2,7 +2,7 @@
 #define _MY_RBTREE_H_
 #include "my_utility.h"
 #include "my_pair.h"
-#include "my_allo.h"
+#include "my_alloc.h"
 
 //#include <ext/new_allocator.h>    // for new__allocator
 //for gtest
