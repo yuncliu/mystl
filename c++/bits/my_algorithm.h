@@ -2,6 +2,8 @@
 
 #define MY_ALGORITHM_H_
 
+#include "my_utility.h"
+
 namespace my {
 
 /*
@@ -17,37 +19,48 @@ sort_r(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __c
     }
 }
 */
-int* quick_sort_partion(int* __first, int* __last);
 
-void sort(int* __first, int* __last) {
-    if (__first < __last) {
-        int* j = quick_sort_partion(__first, __last);
-        sort(__first, j-1);
-        sort(j+1, __last);
-    }
-}
-
+/**
+ * @brief partion the array
+ */
 int* quick_sort_partion(int* __first, int* __last) {
-    int pivot;
-    int* i;
-    int* j;
-    int tmp;
-    pivot = *__first;
-    i = __first;
-    j = __last + 1;
+    int pivot   = *__first;
+    int* i      = __first;
+    int* j      = __last;
 
-    while(1) {
-        do ++i; while( *i <= pivot && i <= __last );
-        do --j; while( *j > pivot );
+    while (1) {
+        do ++i; while ( *i <= pivot && i <= __last );
+        // here i points to the fist element which bigger than pivot
+        do --j; while ( *j > pivot );
+        // here j points to the last element which samller or equal than pivot
         if( i >= j ) break;
-        tmp = *i; *i = *j; *j = tmp;
+        // because j is smaller and i is bigger, swap them
+        my::swap(*i, *j);
     }
-    tmp = *__first;
-    *__first = *j;
-    *j = tmp;
+
+    my::swap(*__first, *j);
+
     return j;
 }
 
+/**
+ * @brief sort
+ * a[4] = {2,1,4,3}, then sort(a[0], a[4]); the second sould be an sentinel position
+ * like container.end();
+ */
+void sort(int* __first, int* __last) {
+    if (__first < __last) {
+        // make the array in to two part on both side of the pivot
+        // all elements in the left side is smaller or equal to pivot
+        // all elements in the right side is bigger than pivot
+        int* pivot = quick_sort_partion(__first, __last);
+        // sort again on the left side
+        sort(__first, pivot);
+        // sort again on the right side
+        sort(pivot + 1, __last);
+    }
 }
+
+} // namespace my
 
 #endif // MY_ALGORITHM_H_

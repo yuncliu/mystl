@@ -3,7 +3,7 @@
 
 TEST(algorithm, array) {
     int a[4] = {2,1,4,3};
-    my::sort(&a[0], &a[3]);
+    my::sort(&a[0], &a[4]);
     EXPECT_EQ(a[0], 1);
     EXPECT_EQ(a[1], 2);
     EXPECT_EQ(a[2], 3);
@@ -16,7 +16,7 @@ TEST(algorithm, array1) {
         a[i] = 100 - i - 1;
     }
 
-    my::sort(&a[0], &a[99]);
+    my::sort(&a[0], &a[100]);
 
     for (int i = 0; i < 100; ++i) {
         EXPECT_EQ(a[i], i);
