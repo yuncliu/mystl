@@ -1,0 +1,6 @@
+#ifndef _MYALGORITHM_
+#define _MYALGORITHM_
+
+#include "bits/my_algorithm.h"
+
+#endif //  _MYALGORITHM_

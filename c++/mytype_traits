@@ -1,0 +1,6 @@
+#ifndef MYTYPE_TRAITS
+#define MYTYPE_TRAITS
+
+#include "bits/my_type_traits.h"
+
+#endif // MYTYPE_TRAITS
