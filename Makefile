@@ -5,12 +5,14 @@ LINKS	=  -lgtest -lpthread -lstdc++
 
 
 TESTOBJS	= c++/src/new.o \
-			  test/pair_unitest.o \
-			  test/rbtree_unitest.o \
-			  test/map_unitest.o \
-			  test/vector_unittest.o \
-			  test/utility_unitest.o \
-		      main.o
+			test/pair_unitest.o \
+			test/rbtree_unitest.o \
+			test/map_unitest.o \
+			test/vector_unittest.o \
+			test/utility_unitest.o \
+			test/type_traits_unittest.o \
+			test/algorithm_unittest.o \
+			main.o
 
 TEST=a.out
 
