@@ -4,8 +4,7 @@ CFLAGS=-std=c++11 -Wall -g  -DDEBUG
 LINKS	=  -lgtest -lpthread -lstdc++
 
 
-TESTOBJS	= c++/src/new.o \
-			test/pair_unitest.o \
+TESTOBJS	= test/pair_unitest.o \
 			test/rbtree_unitest.o \
 			test/map_unitest.o \
 			test/vector_unittest.o \
