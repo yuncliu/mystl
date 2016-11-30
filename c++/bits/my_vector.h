@@ -144,8 +144,11 @@ void vector<_TP, _Alloc>::_insert_aux(iterator pos, const _TP& __x) {
         const size_type __len = __old_size != 0 ? 2 * __old_size : 1;
         iterator __new_head = _allocate(__len);
         iterator __new_tail = __new_head;
-        memcpy(__new_head, _head, (_tail - _head)*sizeof(_TP));
-        __new_tail += _tail - _head;
+
+        for (_TP* i= _head; i != _tail; ++i) {
+            construct(__new_tail, *i);
+            __new_tail++;
+        }
 
         construct(__new_tail, __x);
         __new_tail++;

@@ -5,7 +5,7 @@ namespace my {
 
 template<class _TP>
 void destroy(_TP* __pointer) {
-    __pointer->~TP();
+    __pointer->~_TP();
 }
 
 void destroy(int* __pointer) {
